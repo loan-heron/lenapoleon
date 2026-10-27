@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Le Napoleon — Restaurant &amp; Menu</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+
+  <body>
+    <div class="intro">
+      <img src="./assets/img/logo.png" alt="Logo du restaurant" />
+      <h2 class="nom-resto">Le Napoléon</h2>
+      <h2 class="nom">Michel BOUILLON</h2>
+      <h2 class="etoiles">⋆⋆⋆⋆⋆</h2>
+      <h2>Chartres / France</h2>
+    </div>
+
+    <header id="accueil">
+      <nav class="navbar">
+        <div class="logo-container">
+          <a href="#accueil">
+            <img src="./assets/img/logo.png" alt="Logo du restaurant" class="logo" />
+          </a>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="#reserver">Réserver</a></li>
+          <li><a href="#notre-carte">Notre carte</a></li>
+          <li><a href="#avis">Avis</a></li>
+        </ul>
+      </nav>
+
+      <div class="carrousel" role="region" aria-label="Photos du restaurant">
+        <img src="./assets/img/photo-1723200295608-fa8efcee6781.avif" alt="Dessert du restaurant" />
+        <img src="./assets/img/photo-1705917893168-e03c7da62577.avif" alt="Salle du restaurant" />
+        <img src="./assets/img/photo-1620296595801-3cd364a12807.avif" alt="Ambiance du restaurant" />
+      </div>
+
+      <div class="logo2">
+        <img src="./assets/img/logo2.png" alt="Logo du restaurant" />
+      </div>
+    </header>
+
+    <hr />
+
+    <h2 class="titre">Le Napoléon · Chartres</h2>
+    <p id="texte-page-1">
+      Bienvenue chez Bon Appétit, un lieu où la gourmandise et la convivialité se rencontrent. Nous
+      vous accueillons pour vous faire découvrir une cuisine généreuse, préparée avec soin et
+      inspirée par le plaisir des bons produits. Que vous veniez pour un déjeuner entre collègues,
+      un dîner en famille ou un moment agréable entre amis, nous mettons tout en œuvre pour que
+      votre visite soit aussi savoureuse que chaleureuse. Installez-vous confortablement, prenez le
+      temps de profiter de l’instant et laissez-vous tenter par les plats de notre carte. Chaque
+      repas est l’occasion de partager un bon moment, de découvrir de nouvelles saveurs et de se
+      retrouver autour d’une table. Chez Bon Appétit, nous croyons que les meilleurs souvenirs
+      commencent souvent par un bon repas et un accueil chaleureux. Nous serons ravis de vous
+      recevoir et de vous faire passer un moment agréable dans notre restaurant. Réservez votre
+      table dès maintenant et venez découvrir Bon Appétit !
+    </p>
+
+    <div class="mur">
+      <img src="./assets/img/photo-1653497412928-d770032e9c3a.avif" alt="Mur en pierre" />
+    </div>
+
+    <div class="resto">
+      <img src="./assets/img/food_9_dark.jpg" alt="Plat du restaurant" />
+    </div>
+
+    <details id="reserver">
+      <summary>Réserver</summary>
+
+      <form>
+        <label for="nom">Nom :</label>
+        <input id="nom" name="nom" type="text" placeholder="Votre nom" />
+
+        <label for="prenom">Prénom :</label>
+        <input id="prenom" name="prenom" type="text" placeholder="Votre prénom" />
+
+        <label for="email">Email :</label>
+        <input id="email" name="email" type="email" placeholder="exemple@email.com" />
+
+        <label for="personne">nbr personnes :</label>
+        <input id="personne" name="personne" type="number" placeholder="Ex. 2 pers" />
+
+        <button type="submit">Envoyer</button>
+      </form>
+    </details>
+
+    <main>
+      <section
+        class="scene"
+        id="notre-carte"
+        tabindex="0"
+        aria-label="Menu du restaurant Le Napoleon, livre interactif"
+      >
+        <h1 class="carteTitle">Notre Carte</h1>
+
+        <div class="stage" id="stage">
+          <div class="ground"></div>
+
+          <div class="book" id="book">
+            <div class="board board-left"></div>
+            <div class="board board-right"></div>
+            <div class="edge edge-left"></div>
+            <div class="edge edge-right"></div>
+
+            <div class="sheet" data-i="0">
+              <div class="face front">
+                <img src="./assets/img/page1.png" alt="Le Napoleon — Le menu" draggable="false" />
+              </div>
+              <div class="face back">
+                <img src="./assets/img/page2.png" alt="Menu Decouverte" draggable="false" />
+              </div>
+            </div>
+            <div class="sheet" data-i="1">
+              <div class="face front">
+                <img src="./assets/img/page3.png" alt="Menu Signature" draggable="false" />
+              </div>
+              <div class="face back">
+                <img src="./assets/img/page4.png" alt="Menu Vegetal" draggable="false" />
+              </div>
+            </div>
+            <div class="sheet" data-i="2">
+              <div class="face front">
+                <img
+                  src="./assets/img/page5.png"
+                  alt="Le Napoleon — Michel Bouillon"
+                  draggable="false"
+                />
+              </div>
+              <div class="face back blank"></div>
+            </div>
+          </div>
+
+          <div class="hits" id="hits">
+            <button class="hit hit-left" id="hitLeft" aria-label="Page precedente"></button>
+            <button class="hit hit-right" id="hitRight" aria-label="Page suivante"></button>
+          </div>
+        </div>
+
+        <p class="hint" id="hint">Cliquez sur la couverture pour ouvrir le menu</p>
+      </section>
+
+      <section class="avis" id="avis">
+        <h2 class="avis-title">Avis de nos clients</h2>
+        <p>Découvrez ce que nos clients pensent de notre restaurant et de notre menu.</p>
+        <div class="avis-carousel">
+          <button class="avis-nav avis-nav-left" id="avisPrev" aria-label="Avis precedents">
+            &#10094;
+          </button>
+          <div class="avis-cards" id="avisCards">
+            <div class="avis-card">
+              <img src="./assets/img/testimonial_1_dark.jpg" alt="Profil avis client 1" />
+              <p>Léa</p>
+              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <p>"</p>
+              <p>Excellent restaurant avec un service impeccable !</p>
+              <p>"</p>
+            </div>
+            <div class="avis-card">
+              <img src="./assets/img/testimonial_2_dark.jpg" alt="Profil avis client 2" />
+              <p>Sophie</p>
+              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <p>"</p>
+              <p>Une expérience culinaire exceptionnelle, je recommande vivement !</p>
+              <p>"</p>
+            </div>
+            <div class="avis-card">
+              <img src="./assets/img/testimonial_3_dark.jpg" alt="Profil avis client 3" />
+              <p>Elise</p>
+              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <p>"</p>
+              <p>Une ambiance chaleureuse et des plats délicieux !</p>
+              <p>"</p>
+            </div>
+            <div class="avis-card">
+              <img src="./assets/img/testimonial_4_dark.jpg" alt="Profil avis client 4" />
+              <p>Marc</p>
+              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <p>"</p>
+              <p>Service rapide et plats savoureux, je reviendrai !</p>
+              <p>"</p>
+            </div>
+          </div>
+          <button class="avis-nav avis-nav-right" id="avisNext" aria-label="Avis suivants">
+            &#10095;
+          </button>
+        </div>
+        <a href="#" class="avis-link">Voir tous les avis</a>
+      </section>
+    </main>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

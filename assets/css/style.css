@@ -1,0 +1,703 @@
+:root {
+  --noir: #0b0a07;
+  --blanc: #fafdf6;
+  --or: #d4af37;
+  --tranche: #d9d6cc;
+
+  --pw: 500px; /* largeur d'une page */
+  --ph: 467px; /*2auteur d'une page */
+  --marge: 14px; /* debord de la couverture */
+  --dur: 2s; /* duree d'un tour de page (garder = FLIP_MS dans script.js) */
+  --ease: cubic-bezier(0.37, 0, 0.63, 1);
+}
+
+@font-face {
+  font-family: 'Britannic Bold';
+  src: url('../fonts/BRITANIC.TTF') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('../fonts/SEGOEUI.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--blanc);
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #d4af37;
+}
+
+/* le contenu "Notre carte" / "Avis" garde son texte sombre d'origine,
+   independamment de la couleur doree definie globalement sur body */
+main {
+  color: var(--noir);
+  /* la photo .resto remonte via une marge negative et deborderait sinon sur "Notre Carte" */
+  margin-top: 160px;
+}
+
+header {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.navbar {
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  padding-left: 2%;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  width: 80%;
+  height: 60px;
+  opacity: 1;
+}
+
+.logo {
+  display: block;
+  height: 54px;
+  width: 44px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.65));
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin-left: auto;
+}
+
+.nav-links a {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: #d4af37;
+  transform: scale(1.15);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #d4af37;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.carrousel {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.logo-container {
+  position: absolute;
+  top: 40%;
+  left: 2%;
+  transform: translate(-50%, -50%);
+}
+
+.logo2 {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
+}
+
+.logo2 img {
+  display: block;
+  height: 150px;
+  width: auto;
+}
+
+.carrousel > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: defilement 12s linear infinite;
+  animation-delay: -1.2s;
+}
+
+.carrousel img:nth-child(2) {
+  animation-delay: -9.2s;
+}
+
+.carrousel img:nth-child(3) {
+  animation-delay: -5.2s;
+}
+
+@keyframes defilement {
+  0%,
+  10% {
+    opacity: 0;
+  }
+  10%,
+  33.333% {
+    opacity: 1;
+  }
+  43.333%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carrousel img {
+    animation: none;
+  }
+
+  .carrousel img:first-child {
+    opacity: 1;
+  }
+}
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: white;
+  animation: disparition 3s forwards;
+}
+
+.intro h2 {
+  margin-top: 20px;
+  margin-left: 70px;
+  font-size: 20px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: #d4af37;
+  padding: 3px;
+}
+.etoiles {
+  font-size: 40px;
+  padding: 2px;
+}
+.intro img {
+  width: min(150px, 150px);
+  height: auto;
+  display: block;
+}
+
+@keyframes disparition {
+  0%,
+  75% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+details {
+  width: min(360px, calc(100% - 32px));
+  margin-left: 200px;
+  margin-top: -180px;
+  padding: 20px;
+
+  border-radius: 14px;
+  background: transparent;
+  box-shadow: none;
+}
+
+summary {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fff;
+  background: #b08d25;
+  padding: 10px 18px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  margin-left: 100px;
+}
+
+summary:hover,
+summary:focus-visible {
+  background: #8f711b;
+}
+
+summary::marker {
+  content: '';
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  margin-left: 100px;
+}
+
+form label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+form input {
+  width: 530px;
+  height: 52px;
+  padding: 9px 11px;
+  border: 1px solid rgba(63, 56, 31, 0.45);
+  border-radius: 7px;
+  background: #fff;
+  font: inherit;
+  color: #333;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #b08d25;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+form button {
+  min-height: 44px;
+  margin-top: 6px;
+  border: 0;
+  border-radius: 8px;
+  background: #b08d25;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+form button:hover {
+  background: #8f711b;
+  transform: translateY(-1px);
+}
+
+form button:focus-visible {
+  outline: 3px solid rgba(176, 141, 37, 0.35);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  details {
+    margin-left: 16px;
+    margin-top: 24px;
+  }
+}
+
+input,
+button {
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details::details-content {
+    transition: none;
+  }
+}
+.mur img {
+  display: block;
+  width: 700px;
+  height: 500px;
+  object-fit: cover;
+  margin-left: 1000px;
+  margin-top: -600px;
+}
+
+.resto img {
+  display: block;
+  width: 500px;
+  height: 800px;
+  object-fit: cover;
+  margin-left: 950px;
+  margin-top: -400px;
+}
+
+.titre {
+  color: black;
+  margin-left: 20%;
+  margin-top: -1%;
+  font-size: 20px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  padding: 3px;
+}
+
+#texte-page-1 {
+  width: min(390px, calc(100% - 2rem));
+  margin: 24px 0 0 4%;
+  padding: 18px;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #d4af37;
+  line-height: 1.6;
+  margin-top: 100px;
+  margin-left: 300px;
+}
+
+hr {
+  width: 300px;
+  margin-top: 10%;
+}
+
+.carteTitle {
+  text-align: center;
+  font-family: 'Britannic Bold', Georgia, serif;
+}
+
+.scene {
+  position: relative;
+  height: 100vh;
+  display: flow-root;
+  outline: none;
+}
+
+/* le stage garde la taille d'origine, JS le met a l'echelle de l'ecran */
+.stage {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 20px);
+  margin-left: calc(var(--pw) * -1);
+  margin-top: calc(var(--ph) / -2);
+  width: calc(var(--pw) * 2);
+  height: var(--ph);
+  transform-origin: center center;
+  /* la perspective est portee par le stage : le livre est en 3D,
+     la couche de clic reste a plat par-dessus */
+  perspective: 2600px;
+  perspective-origin: 50% 40%;
+}
+
+.ground {
+  position: absolute;
+  left: 50%;
+  bottom: -70px;
+  width: 1500px;
+  height: 90px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(11, 10, 7, 0.16), rgba(11, 10, 7, 0));
+  pointer-events: none;
+}
+
+.book {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform var(--dur) var(--ease);
+}
+
+/* ---------- Couverture rigide ---------- */
+.board {
+  position: absolute;
+  top: calc(var(--marge) * -1);
+  height: calc(var(--ph) + var(--marge) * 2);
+  width: calc(var(--pw) + var(--marge));
+  background: var(--noir);
+  border-radius: 10px;
+  transform: translateZ(-2px);
+}
+.board::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1.5px solid var(--or);
+  border-radius: 6px;
+}
+.board-right {
+  left: calc(var(--pw) - var(--marge));
+}
+.board-left {
+  left: 0;
+}
+
+/* ---------- Epaisseur des pages ---------- */
+.edge {
+  position: absolute;
+  top: 0;
+  width: var(--pw);
+  height: var(--ph);
+  background: var(--blanc);
+  transform: translateZ(-1px);
+}
+.edge-right {
+  left: var(--pw);
+  box-shadow:
+    3px 1.5px 0 0 var(--blanc),
+    4px 1.5px 0 0 var(--tranche),
+    6px 3px 0 0 var(--blanc),
+    7px 3px 0 0 var(--tranche),
+    9px 4.5px 0 0 var(--blanc),
+    10px 4.5px 0 0 var(--tranche);
+}
+.edge-left {
+  left: 0;
+  box-shadow:
+    -3px 1.5px 0 0 var(--blanc),
+    -4px 1.5px 0 0 var(--tranche),
+    -6px 3px 0 0 var(--blanc),
+    -7px 3px 0 0 var(--tranche),
+    -9px 4.5px 0 0 var(--blanc),
+    -10px 4.5px 0 0 var(--tranche);
+}
+
+/* le cote gauche n'existe que livre ouvert */
+.board-left,
+.edge-left {
+  opacity: 0;
+  transition: opacity calc(var(--dur) * 0.5) ease;
+}
+.book.open .board-left,
+.book.open .edge-left {
+  opacity: 1;
+}
+
+/* ---------- Feuilles ---------- */
+.sheet {
+  position: absolute;
+  top: 0;
+  left: var(--pw); /* le dos du livre */
+  width: var(--pw);
+  height: var(--ph);
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform var(--dur) var(--ease);
+  transform: translateZ(var(--z, 0px)) rotateY(var(--a, 0deg));
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--blanc);
+  overflow: hidden;
+}
+.face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.face.back {
+  transform: rotateY(180deg);
+}
+
+/* ombre droite au niveau du pli, sans flou */
+.face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.face.front::after {
+  background: linear-gradient(90deg, rgba(11, 10, 7, 0.16), rgba(11, 10, 7, 0) 7%);
+}
+.face.back::after {
+  background: linear-gradient(270deg, rgba(11, 10, 7, 0.16), rgba(11, 10, 7, 0) 7%);
+}
+
+/* ---------- Zones de clic ---------- */
+.hits {
+  position: absolute;
+  inset: 0;
+  transition: transform var(--dur) var(--ease);
+  z-index: 5;
+}
+.hit {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.hit-left {
+  left: 0;
+}
+.hit-right {
+  left: 50%;
+}
+.hit:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: -4px;
+}
+.hits:not(.open) .hit-left {
+  display: none;
+}
+
+/* ---------- Indication ---------- */
+.hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  margin: 0;
+  text-align: center;
+  font:
+    500 14px/1.4 Georgia,
+    'Times New Roman',
+    serif;
+  letter-spacing: 0.08em;
+  color: var(--noir);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.no-anim *,
+.no-anim *::before,
+.no-anim *::after {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 0.01s;
+  }
+}
+
+.avis-title {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-size: 2rem;
+  font-family: 'Britannic Bold', Georgia, serif;
+  color: var(--noir);
+}
+.avis {
+  text-align: center;
+  font-family: 'Segoe UI', Georgia, serif;
+  padding: 2rem;
+}
+.avis-carousel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1080px;
+  margin: 1rem auto;
+}
+.avis-cards {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 2rem;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.avis-cards::-webkit-scrollbar {
+  display: none;
+}
+.avis-card {
+  flex: 0 0 300px;
+  padding: 1rem;
+  border: 1px solid var(--noir);
+  border-radius: 8px;
+  margin-top: 2em;
+  scroll-snap-align: center;
+}
+.avis-nav {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--noir);
+  background: var(--blanc);
+  color: var(--noir);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.avis-nav:hover,
+.avis-nav:focus-visible {
+  background: var(--or);
+  border-color: var(--or);
+  color: var(--blanc);
+  outline: none;
+}
+.avis-link:hover {
+  text-decoration: underline;
+}
+.avis-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.avis-note {
+  color: var(--or);
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+}
+.avis-link {
+  display: inline-block;
+  margin-top: 3rem;
+  font-family: 'Segoe UI', Georgia, serif;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  font-weight: bold;
+  color: var(--or);
+}
