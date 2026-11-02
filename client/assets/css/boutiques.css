@@ -1,0 +1,111 @@
+:root {
+  --fond: #f8f9fb;
+  --or: #c4a36a;
+  --texte: #5b5d62;
+  --ombre: rgba(0, 0, 0, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+}
+
+main {
+  width: 100%;
+  max-width: 440px;
+  text-align: center;
+}
+
+.logo {
+  display: block;
+  width: 150px;
+  height: auto;
+  margin: 125px 120px 40px;
+}
+
+h1 {
+  padding-left: 0.32em;
+  font-size: 2.4rem;
+  font-weight: 300;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--or);
+}
+
+.baseline {
+  margin-top: 14px;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--or);
+}
+
+.signature {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 340px;
+  margin: 18px auto 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--or);
+}
+
+.signature::before,
+.signature::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--or);
+}
+
+.question {
+  margin: 56px 0 36px;
+  font-size: 1.25rem;
+}
+
+.boutons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  padding: 22px 0;
+  background: var(--or);
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px var(--ombre);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    filter 0.15s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px var(--ombre);
+  filter: brightness(1.05);
+}
+
+.btn:active {
+  transform: translateY(0);
+}

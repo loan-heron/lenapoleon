@@ -1,0 +1,412 @@
+:root {
+  --noir: #0b0a07;
+  --blanc: #fafdf6;
+  --or: #d4af37;
+  --or-moyen: #b08d25;
+  --or-fonce: #8f711b; /* or lisible pour le petit texte sur fond blanc */
+  --creme: #f6efd8;
+  --tranche: #d9d6cc;
+}
+
+@font-face {
+  font-family: 'Britannic Bold';
+  src: url('../fonts/BRITANIC.TTF') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('../fonts/SEGOEUI.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--blanc);
+  color: var(--noir);
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+/* ---------- Header (barre flottante) ---------- */
+.header {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  width: 80%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5% 0 2%;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  display: block;
+  height: 54px;
+}
+
+.logo img {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  color: var(--noir);
+  font-weight: 500;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--or-fonce);
+  transform: scale(1.1);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--or);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  width: 100%;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  height: 70vh;
+  min-height: 380px;
+}
+
+.hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 6px;
+  background: var(--or);
+}
+
+/* ---------- Intro ---------- */
+.intro {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 1rem;
+  text-align: center;
+}
+
+.intro h1 {
+  font-family: 'Britannic Bold', Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--or-fonce);
+}
+
+.intro p {
+  margin-top: 0.75rem;
+}
+
+.infos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 2.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--or);
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+.infos strong {
+  color: var(--or-fonce);
+}
+
+/* ---------- Sections ---------- */
+section[id] {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 1rem;
+}
+
+.carteTitle {
+  text-align: center;
+  font-family: 'Britannic Bold', Georgia, serif;
+  font-size: 2rem;
+  color: var(--noir);
+}
+
+.carteTitle::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  margin: 0.6rem auto 0;
+  background: var(--or);
+}
+
+.sous-titre {
+  margin: 2.5rem 0 1rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: normal;
+  font-size: 1.4rem;
+  color: var(--or-fonce);
+}
+
+/* ---------- Réserver ---------- */
+.reserver-intro {
+  max-width: 560px;
+  margin: 1rem auto 0;
+  text-align: center;
+}
+
+.reserver form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 1.25rem;
+  max-width: 680px;
+  margin: 2rem auto 0;
+  padding: 2rem;
+  border: 1.5px solid var(--or);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.champ {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.champ.large {
+  grid-column: 1 / -1;
+}
+
+.reserver label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.reserver input,
+.reserver select {
+  height: 48px;
+  padding: 0 0.8rem;
+  border: 1px solid rgba(63, 56, 31, 0.45);
+  border-radius: 7px;
+  background: #fff;
+  font: inherit;
+  color: var(--noir);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.reserver input:focus,
+.reserver select:focus {
+  outline: none;
+  border-color: var(--or-moyen);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+}
+
+.btn {
+  min-height: 46px;
+  padding: 0 1.4rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--or-moyen);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--or-fonce);
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(176, 141, 37, 0.4);
+  outline-offset: 2px;
+}
+
+.reserver .btn {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Notre carte (produits) ---------- */
+.produits {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.produit {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--or);
+  border-radius: 10px;
+  background: #fff;
+}
+
+/* remplace le contenu par <img src="..."> quand tu as les photos */
+.produit-img {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--creme), #fff 60%, var(--creme));
+  border-bottom: 1px solid var(--or);
+  font-size: 3rem;
+}
+
+.produit-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.produit-corps {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem;
+}
+
+.produit h4 {
+  font-family: 'Britannic Bold', Georgia, serif;
+  font-size: 1.15rem;
+}
+
+.produit p {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #4a4636;
+}
+
+.produit-bas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.prix {
+  font-family: 'Britannic Bold', Georgia, serif;
+  font-size: 1.25rem;
+  color: var(--or-fonce);
+}
+
+.produit .btn {
+  min-height: 38px;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+}
+
+.avis-cards {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.avis-cards::-webkit-scrollbar {
+  display: none;
+}
+
+.avis-card {
+  flex: 0 0 300px;
+  scroll-snap-align: center;
+  padding: 1.25rem;
+  border: 1px solid var(--or);
+  border-radius: 8px;
+  background: #fff;
+  text-align: center;
+}
+
+.avis-note {
+  color: var(--or);
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+}
+
+.avis-card p {
+  margin: 0.6rem 0;
+  font-size: 0.95rem;
+}
+
+.avis-card cite {
+  font-weight: 700;
+  font-style: normal;
+  color: var(--or-fonce);
+}
+
+.footer {
+  margin-top: 4rem;
+  padding: 2rem 1.5rem;
+  border-top: 6px solid var(--or);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.footer a {
+  color: var(--or-fonce);
+  font-weight: 700;
+}
+

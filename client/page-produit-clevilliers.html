@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Le Napoléon — Notre boutique à Clévilliers</title>
+    <link rel="stylesheet" href="./assets/css/page-produit-clevilliers.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <a href="./index.html" class="logo">
+        <img src="./assets/img/logo.png" alt="Le Napoléon – Pâtisserie, Boulangerie, Épicerie" />
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#reserver">Réserver</a></li>
+          <li><a href="#notre-carte">Notre carte</a></li>
+          <li><a href="#avis">Avis</a></li>
+          <li><a href="./boutiques.html">Boutique</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <img src="./assets/img/food_9_dark.jpg" alt="Façade de la boutique à Clévilliers" />
+        <div class="hero-line"></div>
+      </section>
+
+      <section class="intro">
+        <h1>Notre boutique à Clévilliers</h1>
+        <p>Notre boutique de village : pains du jour, gourmandises et produits du terroir.</p>
+        <ul class="infos">
+          <li><strong>Adresse</strong> Clévilliers (28300)</li>
+          <li><strong>Horaires</strong> Mar–Sam 6h30–19h · Dim 7h–12h30</li>
+          <li><strong>Téléphone</strong> 02 00 00 00 01</li>
+        </ul>
+      </section>
+
+      <section id="reserver" class="reserver">
+        <h2 class="carteTitle">Réserver</h2>
+        <p class="reserver-intro">
+          Commandez en ligne et retirez vos produits à la boutique de Clévilliers, à l’heure qui
+          vous arrange.
+        </p>
+
+        <form action="#" method="post">
+          <div class="champ">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" autocomplete="name" required />
+          </div>
+          <div class="champ">
+            <label for="tel">Téléphone</label>
+            <input type="tel" id="tel" name="tel" autocomplete="tel" required />
+          </div>
+          <div class="champ">
+            <label for="date">Date de retrait</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="champ">
+            <label for="heure">Heure de retrait</label>
+            <select id="heure" name="heure" required>
+              <option value="">Choisir</option>
+              <option>8h00</option>
+              <option>10h00</option>
+              <option>12h00</option>
+              <option>15h00</option>
+              <option>17h00</option>
+            </select>
+          </div>
+          <div class="champ large">
+            <label for="commande">Votre commande</label>
+            <input type="text" id="commande" name="commande" placeholder="Ex. 1 Napoléon, 2 baguettes tradition" />
+          </div>
+          <button type="submit" class="btn">Réserver mon retrait</button>
+        </form>
+      </section>
+
+      <section id="notre-carte" class="carte">
+        <h2 class="carteTitle">Notre carte</h2>
+
+        <h3 class="sous-titre">Pâtisseries</h3>
+        <ul class="produits">
+          <li class="produit">
+            <div class="produit-img" ><img src="./assets/img/photo-1763683944394-f95f8132a43b.avif" alt="vienoiserie"></div>
+            <div class="produit-corps">
+              <h4>Napoléon</h4>
+              <p>Feuilletage croustillant, crème pâtissière vanille et glaçage fondant.</p>
+              <div class="produit-bas">
+                <span class="prix">4,80 €</span>
+                <button type="button" class="btn">Ajouter</button>
+              </div>
+            </div>
+          </li>
+          <li class="produit">
+            <div class="produit-img" ><img src="./assets/img/photo-1593424718424-cf4d83f3def1.avif"></div>
+            <div class="produit-corps">
+              <h4>Tarte aux fraises</h4>
+              <p>Pâte sablée, crème d’amande et fraises fraîches.</p>
+              <div class="produit-bas">
+                <span class="prix">4,50 €</span>
+                <button type="button" class="btn">Ajouter</button>
+              </div>
+            </div>
+          </li>
+          <li class="produit">
+            <div class="produit-img" ><img src="./assets/img/photo-1658740879058-80f783c6b033.avif"></div>
+            <div class="produit-corps">
+              <h4>Éclair chocolat</h4>
+              <p>Pâte à choux, crème au chocolat noir, glaçage brillant.</p>
+              <div class="produit-bas">
+                <span class="prix">3,60 €</span>
+                <button type="button" class="btn">Ajouter</button>
+              </div>
+            </div>
+          </li>
+          <li class="produit">
+            <div class="produit-img" ><img src="./assets/img/photo-1622941367239-8acd68fa946d.avif"></div>
+            <div class="produit-corps">
+              <h4>Tarte citron meringuée</h4>
+              <p>Crème citron acidulée et meringue dorée.</p>
+              <div class="produit-bas">
+                <span class="prix">4,20 €</span>
+                <button type="button" class="btn">Ajouter</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <h3 class="sous-titre">Boulangerie</h3>
+        <ul class="produits">
+          <li class="produit">
+            <div class="produit-img" role="img" aria-label="Baguette tradition"><img src="./assets/img/photo-1549931319-a545dcf3bc73.avif"></div>
+            <div class="produit-corps">
+              <h4>Baguette tradition</h4>
+              <p>Farine de blé, longue fermentation, croûte dorée.</p>
+              <div class="produit-bas">
+                <span class="prix">1,40 €</span>
+                <button type="button" class="btn">Ajouter</button>
+              </div>
+            </div>
+          </li>
+          <li class="produit">
+            <div class="produit-img" role="img" aria-label="Pain de campagne"><img src="./assets/img/photo-1586765501019-cbe3973ef8fa.avif"></div>
+            <div class="produit-corps">
+              <h4>Pain de campagne</h4>
+              <p>Levain naturel, mie dense et croûte rustique.</p>
+              <div class="produit-bas">
+                <span class="prix">4,20 €</span>
+                <button type="button" class="btn">Ajouter</button>
+              </div>
+            </div>
+          </li>
+          <li class="produit">
+            <div class="produit-img" role="img" aria-label="Croissant pur beurre"><img src="./assets/img/photo-1681218424681-b4f8228ecea9.avif"></div>
+            <div class="produit-corps">
+              <h4>Croissant pur beurre</h4>
+              <p>Feuilletage au beurre, cuit chaque matin.</p>
+              <div class="produit-bas">
+                <span class="prix">1,30 €</span>
+                <button type="button" class="btn">Ajouter</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+
+      </section>
+
+
+    </main>
+
+    <footer class="footer">
+      <p>Le Napoléon Chartres · <a href="./boutiques.html">Voir toutes nos boutiques</a></p>
+    </footer>
+  </body>
+</html>
