@@ -1,0 +1,227 @@
+{
+  "info": {
+    "name": "Le Napoleon API",
+    "description": "Tests de l'API du restaurant Le Napoleon. Lancer la collection dans l'ordre (Collection Runner) : le menu créé est réutilisé par les requêtes suivantes via {{menuId}}.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "menuId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Menus",
+      "item": [
+        {
+          "name": "POST - Créer un menu",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "pm.test('Le menu a un id et le bon nom', () => {",
+                  "  pm.expect(body).to.have.property('id');",
+                  "  pm.expect(body.nom).to.eql('Menu du Napoleon');",
+                  "});",
+                  "pm.collectionVariables.set('menuId', body.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Menu du Napoleon\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/menu",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "menu"]
+            }
+          }
+        },
+        {
+          "name": "GET - Liste des menus",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('La réponse est un tableau', () => pm.expect(pm.response.json()).to.be.an('array'));",
+                  "pm.test('Chaque menu a un nom', () => {",
+                  "  pm.response.json().forEach(m => pm.expect(m).to.have.property('nom'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/menu",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "menu"]
+            }
+          }
+        },
+        {
+          "name": "GET - Menu par id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Le nom correspond', () => pm.expect(pm.response.json().nom).to.eql('Menu du Napoleon'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/menu/{{menuId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "menu", "{{menuId}}"]
+            }
+          }
+        },
+        {
+          "name": "GET - Menu inexistant (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Message d\\'erreur présent', () => pm.expect(pm.response.json()).to.have.property('error'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/menu/999999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "menu", "999999"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Modifier un menu",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Le nom est mis à jour', () => pm.expect(pm.response.json().nom).to.eql('Menu du Napoleon (modifié)'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Menu du Napoleon (modifié)\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/menu/{{menuId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "menu", "{{menuId}}"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Menu inexistant (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Inexistant\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/menu/999999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "menu", "999999"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Supprimer un menu",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 204', () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/menu/{{menuId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "menu", "{{menuId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Déjà supprimé (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/menu/{{menuId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "menu", "{{menuId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

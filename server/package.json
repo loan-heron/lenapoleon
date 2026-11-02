@@ -1,0 +1,34 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend du site du restaurant le napoleon",
+  "keywords": [
+    "resto",
+    "gastronomie",
+    "lenapoleon"
+  ],
+  "homepage": "https://github.com/loan-heron/lenapoleon#readme",
+  "bugs": {
+    "url": "https://github.com/loan-heron/lenapoleon/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loan-heron/lenapoleon.git"
+  },
+  "license": "MIT",
+  "author": "Loan & Evan",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "db:migrate": "node database/migrations/migrate.js",
+    "db:seed": "node database/seeds/seed.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "pg": "^8.23.1"
+  }
+}
