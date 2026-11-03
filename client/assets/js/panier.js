@@ -1,152 +1,147 @@
-(() => {
-  const STORAGE_KEY = 'lenapoleon-panier-v1';
-  const dialog = document.querySelector('[data-cart-dialog]');
-  if (!dialog) return;
+const clePanier = 'lenapoleon-panier-v1';
+let panier = JSON.parse(localStorage.getItem(clePanier) || '[]');
 
-  const list = dialog.querySelector('[data-cart-items]');
-  const empty = dialog.querySelector('[data-cart-empty]');
-  const summary = dialog.querySelector('[data-cart-summary]');
-  const total = dialog.querySelector('[data-cart-total]');
-  const countBadges = [...document.querySelectorAll('[data-cart-count]')];
-  const money = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
+// Garde les paniers enregistrés avant cette version.
+panier = panier.map((article) => ({
+  nom: article.nom || article.name,
+  prix: article.prix ?? article.price,
+  image: article.image || '',
+  boutique: article.boutique || article.shop || 'Boutique',
+  quantite: article.quantite || article.quantity || 1,
+}));
 
-  function readCart() {
-    try {
-      const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      return Array.isArray(value) ? value.filter((item) => item && item.id && item.name) : [];
-    } catch {
-      return [];
-    }
+const fenetrePanier = document.querySelector('[data-cart-dialog]');
+const listePanier = document.querySelector('[data-cart-items]');
+const messageVide = document.querySelector('[data-cart-empty]');
+const totalPanier = document.querySelector('[data-cart-total]');
+const compteurPanier = document.querySelector('[data-cart-count]');
+const prixEuro = new Intl.NumberFormat('fr-FR', {
+  style: 'currency',
+  currency: 'EUR',
+});
+
+function afficherPanier() {
+  listePanier.innerHTML = '';
+  let total = 0;
+  let nombreArticles = 0;
+
+  panier.forEach((article, index) => {
+    total += article.prix * article.quantite;
+    nombreArticles += article.quantite;
+
+    const ligne = document.createElement('li');
+    ligne.className = 'cart-item';
+
+    const image = document.createElement('img');
+    image.className = 'cart-item-image';
+    image.src = article.image;
+    image.alt = '';
+
+    const details = document.createElement('div');
+    details.className = 'cart-item-details';
+    const nomArticle = document.createElement('strong');
+    nomArticle.textContent = article.nom;
+    const nomBoutique = document.createElement('span');
+    nomBoutique.textContent = article.boutique;
+    const prixArticle = document.createElement('span');
+    prixArticle.className = 'cart-item-price';
+    prixArticle.textContent = prixEuro.format(article.prix * article.quantite);
+    details.append(nomArticle, nomBoutique, prixArticle);
+
+    const boutons = document.createElement('div');
+    boutons.className = 'cart-controls';
+
+    const moins = document.createElement('button');
+    moins.textContent = '-';
+    moins.setAttribute('aria-label', 'Retirer un article');
+    moins.onclick = () => changerQuantite(index, -1);
+
+    const quantite = document.createElement('span');
+    quantite.className = 'cart-quantity';
+    quantite.textContent = article.quantite;
+
+    const plus = document.createElement('button');
+    plus.textContent = '+';
+    plus.setAttribute('aria-label', 'Ajouter un article');
+    plus.onclick = () => changerQuantite(index, 1);
+
+    const supprimer = document.createElement('button');
+    supprimer.className = 'cart-remove';
+    supprimer.textContent = 'Supprimer';
+    supprimer.onclick = () => supprimerArticle(index);
+
+    boutons.append(moins, quantite, plus, supprimer);
+    ligne.append(image, details, boutons);
+    listePanier.append(ligne);
+  });
+
+  compteurPanier.textContent = nombreArticles;
+  messageVide.hidden = panier.length > 0;
+  document.querySelector('[data-cart-summary]').hidden = panier.length === 0;
+  totalPanier.textContent = prixEuro.format(total);
+}
+
+function enregistrerPanier() {
+  localStorage.setItem(clePanier, JSON.stringify(panier));
+  afficherPanier();
+}
+
+function ajouterArticle(nom, prix, image, boutique) {
+  const article = panier.find((item) => item.nom === nom);
+
+  if (article) {
+    article.quantite++;
+  } else {
+    panier.push({ nom, prix, image, boutique, quantite: 1 });
   }
 
-  let cart = readCart();
+  enregistrerPanier();
+}
 
-  function save() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
-    render();
+function changerQuantite(index, changement) {
+  panier[index].quantite += changement;
+
+  if (panier[index].quantite === 0) {
+    panier.splice(index, 1);
   }
 
-  function render() {
-    list.replaceChildren();
-    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    countBadges.forEach((badge) => {
-      badge.textContent = itemCount;
-      badge.setAttribute('aria-label', `${itemCount} article${itemCount > 1 ? 's' : ''} dans le panier`);
-    });
+  enregistrerPanier();
+}
 
-    empty.hidden = cart.length > 0;
-    summary.hidden = cart.length === 0;
-    let amount = 0;
+function supprimerArticle(index) {
+  panier.splice(index, 1);
+  enregistrerPanier();
+}
 
-    cart.forEach((item, index) => {
-      amount += item.price * item.quantity;
-      const row = document.createElement('li');
-      row.className = 'cart-item';
+document.querySelectorAll('[data-cart-open]').forEach((bouton) => {
+  bouton.onclick = () => {
+    afficherPanier();
+    fenetrePanier.showModal();
+  };
+});
 
-      const image = document.createElement('img');
-      image.className = 'cart-item-image';
-      image.src = item.image || './assets/img/logo.png';
-      image.alt = '';
+document.querySelector('[data-cart-close]').onclick = () => fenetrePanier.close();
+document.querySelector('[data-cart-clear]').onclick = () => {
+  panier = [];
+  enregistrerPanier();
+};
 
-      const details = document.createElement('div');
-      details.className = 'cart-item-details';
-      const name = document.createElement('strong');
-      name.textContent = item.name;
-      const shop = document.createElement('span');
-      shop.textContent = item.shop;
-      const price = document.createElement('span');
-      price.className = 'cart-item-price';
-      price.textContent = money.format(item.price * item.quantity);
-      details.append(name, shop, price);
+document.querySelectorAll('.produit').forEach((produit) => {
+  const bouton = produit.querySelector('.produit-bas .btn');
+  const nom = produit.querySelector('h4').textContent.trim();
+  const prix = Number.parseFloat(
+    produit.querySelector('.prix').textContent.replace(',', '.').replace(' €', ''),
+  );
+  const image = produit.querySelector('img').getAttribute('src');
+  const boutique = document.querySelector('.intro h1').textContent.replace('Notre boutique à ', '');
 
-      const controls = document.createElement('div');
-      controls.className = 'cart-controls';
-      controls.setAttribute('aria-label', `Quantité de ${item.name}`);
-      const minus = makeControl('−', 'Diminuer la quantité', index, 'minus');
-      const quantity = document.createElement('span');
-      quantity.className = 'cart-quantity';
-      quantity.textContent = item.quantity;
-      const plus = makeControl('+', 'Augmenter la quantité', index, 'plus');
-      const remove = makeControl('Supprimer', `Supprimer ${item.name}`, index, 'remove');
-      remove.className = 'cart-remove';
-      controls.append(minus, quantity, plus, remove);
+  bouton.onclick = () => {
+    ajouterArticle(nom, prix, image, boutique);
+    bouton.textContent = 'Ajouté';
+    setTimeout(() => {
+      bouton.textContent = 'Ajouter';
+    }, 700);
+  };
+});
 
-      row.append(image, details, controls);
-      list.append(row);
-    });
-
-    total.textContent = money.format(amount);
-  }
-
-  function makeControl(label, accessibleName, index, action) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.textContent = label;
-    button.setAttribute('aria-label', accessibleName);
-    button.dataset.cartAction = action;
-    button.dataset.cartIndex = index;
-    return button;
-  }
-
-  document.querySelectorAll('[data-cart-open]').forEach((button) => {
-    button.addEventListener('click', () => {
-      cart = readCart();
-      render();
-      dialog.showModal();
-    });
-  });
-
-  dialog.querySelector('[data-cart-close]').addEventListener('click', () => dialog.close());
-  dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
-  });
-
-  list.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-cart-action]');
-    if (!button) return;
-    const index = Number(button.dataset.cartIndex);
-    const item = cart[index];
-    if (!item) return;
-
-    if (button.dataset.cartAction === 'plus') item.quantity += 1;
-    if (button.dataset.cartAction === 'minus') item.quantity -= 1;
-    if (button.dataset.cartAction === 'remove' || item.quantity <= 0) cart.splice(index, 1);
-    save();
-  });
-
-  dialog.querySelector('[data-cart-clear]').addEventListener('click', () => {
-    cart = [];
-    save();
-  });
-
-  document.querySelectorAll('.produit').forEach((card) => {
-    const button = card.querySelector('.produit-bas .btn');
-    const name = card.querySelector('h4')?.textContent.trim();
-    const priceText = card.querySelector('.prix')?.textContent || '';
-    const price = Number.parseFloat(priceText.replace(/[^\d,.-]/g, '').replace(',', '.'));
-    if (!button || !name || !Number.isFinite(price)) return;
-
-    button.addEventListener('click', () => {
-      const image = card.querySelector('img')?.getAttribute('src') || '';
-      const shop = document.querySelector('.intro h1')?.textContent.replace('Notre boutique à ', '').trim() || 'Boutique';
-      const id = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-      const existing = cart.find((item) => item.id === id);
-
-      if (existing) existing.quantity += 1;
-      else cart.push({ id, name, price, quantity: 1, image, shop });
-
-      save();
-      button.classList.remove('button-feedback');
-      requestAnimationFrame(() => button.classList.add('button-feedback'));
-      button.addEventListener('animationend', () => button.classList.remove('button-feedback'), { once: true });
-    });
-  });
-
-  window.addEventListener('storage', (event) => {
-    if (event.key !== STORAGE_KEY) return;
-    cart = readCart();
-    render();
-  });
-
-  render();
-})();
+afficherPanier();

@@ -1,28 +1,21 @@
 (() => {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sections = document.querySelectorAll(
+    '.intro, .reserver, .carteTitle, .sous-titre, .produit, .footer',
+  );
 
-  // Apparition progressive des sections et des produits pendant le défilement.
-  if (!reduceMotion && 'IntersectionObserver' in window) {
-    const revealItems = document.querySelectorAll(
-      '.intro, .reserver, .carteTitle, .sous-titre, .produit, .footer',
-    );
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -35px 0px' },
-    );
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((elements) => {
+      elements.forEach((element) => {
+        if (element.isIntersecting) {
+          element.target.classList.add('is-visible');
+          observer.unobserve(element.target);
+        }
+      });
+    });
 
-    revealItems.forEach((item, index) => {
-      item.classList.add('reveal-on-scroll');
-      if (item.classList.contains('produit')) {
-        item.style.setProperty('--reveal-delay', `${(index % 4) * 75}ms`);
-      }
-      revealObserver.observe(item);
+    sections.forEach((section) => {
+      section.classList.add('reveal-on-scroll');
+      observer.observe(section);
     });
   }
 
