@@ -590,18 +590,35 @@ hr {
   padding: 2rem;
 }
 .avis-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  display: flex;
   gap: 1rem;
   max-width: 1080px;
   margin: 1rem auto;
   padding: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.5rem;
+  scrollbar-color: var(--or) transparent;
+  scrollbar-width: thin;
 }
 .avis-card {
+  flex: 0 0 calc((100% - 2rem) / 3);
   padding: 1rem;
   border: 1px solid var(--noir);
   border-radius: 8px;
+  scroll-snap-align: start;
   transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.avis-cards:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+.avis-cards::-webkit-scrollbar {
+  height: 8px;
+}
+.avis-cards::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: var(--or);
 }
 .avis-card:hover {
   transform: translateY(-3px);
@@ -655,6 +672,9 @@ hr {
   }
   hr {
     max-width: 80%;
+  }
+  .avis-card {
+    flex-basis: calc((100% - 1rem) / 2);
   }
 }
 @media (max-width: 600px) {
@@ -710,6 +730,9 @@ hr {
   }
   .avis {
     padding: 1.25rem 0.75rem;
+  }
+  .avis-card {
+    flex-basis: 100%;
   }
   .avis-title {
     font-size: 1.6rem;
