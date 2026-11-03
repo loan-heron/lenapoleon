@@ -28,8 +28,7 @@
           <li><a href="#reserver">Réserver</a></li>
           <li><a href="#notre-carte">Notre carte</a></li>
           <li><a href="#avis">Avis</a></li>
-          <li><a href="./boutiques.html" target="_blank">Boutique</a></li>
-          
+          <li><a href="./pages/boutiques.html" target="_blank">Boutique</a></li>
         </ul>
       </nav>
 
@@ -94,40 +93,38 @@
         class="scene"
         id="notre-carte"
         tabindex="0"
-        aria-label="Menu du restaurant Le Napoleon, livre interactif"
+        aria-label="Menu du restaurant Le Napoléon. Utilisez les flèches gauche et droite pour tourner les pages."
       >
         <h1 class="carteTitle">Notre Carte</h1>
-
         <div class="stage" id="stage">
           <div class="ground"></div>
-
           <div class="book" id="book">
             <div class="board board-left"></div>
             <div class="board board-right"></div>
             <div class="edge edge-left"></div>
             <div class="edge edge-right"></div>
 
-            <div class="sheet" data-i="0">
+            <div class="sheet">
               <div class="face front">
-                <img src="./assets/img/page1.png" alt="Le Napoleon — Le menu" draggable="false" />
+                <img src="./assets/img/page1.png" alt="Le Napoléon — Le menu" draggable="false" />
               </div>
               <div class="face back">
-                <img src="./assets/img/page2.png" alt="Menu Decouverte" draggable="false" />
+                <img src="./assets/img/page2.png" alt="Menu Découverte" draggable="false" />
               </div>
             </div>
-            <div class="sheet" data-i="1">
+            <div class="sheet">
               <div class="face front">
                 <img src="./assets/img/page3.png" alt="Menu Signature" draggable="false" />
               </div>
               <div class="face back">
-                <img src="./assets/img/page4.png" alt="Menu Vegetal" draggable="false" />
+                <img src="./assets/img/page4.png" alt="Menu Végétal" draggable="false" />
               </div>
             </div>
-            <div class="sheet" data-i="2">
+            <div class="sheet">
               <div class="face front">
                 <img
                   src="./assets/img/page5.png"
-                  alt="Le Napoleon — Michel Bouillon"
+                  alt="Le Napoléon — Michel Bouillon"
                   draggable="false"
                 />
               </div>
@@ -136,62 +133,53 @@
           </div>
 
           <div class="hits" id="hits">
-            <button class="hit hit-left" id="hitLeft" aria-label="Page precedente"></button>
+            <button class="hit hit-left" id="hitLeft" aria-label="Page précédente"></button>
             <button class="hit hit-right" id="hitRight" aria-label="Page suivante"></button>
           </div>
         </div>
-
         <p class="hint" id="hint">Cliquez sur la couverture pour ouvrir le menu</p>
       </section>
 
       <section class="avis" id="avis">
         <h2 class="avis-title">Avis de nos clients</h2>
         <p>Découvrez ce que nos clients pensent de notre restaurant et de notre menu.</p>
-        <div class="avis-carousel">
-          <button class="avis-nav avis-nav-left" id="avisPrev" aria-label="Avis precedents">
-            &#10094;
-          </button>
-          <div class="avis-cards" id="avisCards">
-            <div class="avis-card">
-              <img src="./assets/img/testimonial_1_dark.jpg" alt="Profil avis client 1" />
-              <p>Léa</p>
-              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-              <p>"</p>
-              <p>Excellent restaurant avec un service impeccable !</p>
-              <p>"</p>
-            </div>
-            <div class="avis-card">
-              <img src="./assets/img/testimonial_2_dark.jpg" alt="Profil avis client 2" />
-              <p>Sophie</p>
-              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-              <p>"</p>
-              <p>Une expérience culinaire exceptionnelle, je recommande vivement !</p>
-              <p>"</p>
-            </div>
-            <div class="avis-card">
-              <img src="./assets/img/testimonial_3_dark.jpg" alt="Profil avis client 3" />
-              <p>Elise</p>
-              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-              <p>"</p>
-              <p>Une ambiance chaleureuse et des plats délicieux !</p>
-              <p>"</p>
-            </div>
-            <div class="avis-card">
-              <img src="./assets/img/testimonial_4_dark.jpg" alt="Profil avis client 4" />
-              <p>Marc</p>
-              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-              <p>"</p>
-              <p>Service rapide et plats savoureux, je reviendrai !</p>
-              <p>"</p>
-            </div>
+        <div class="avis-cards">
+          <div class="avis-card">
+            <img src="./assets/img/testimonial_1_dark.jpg" alt="Profil avis client 1" />
+            <p>Léa</p>
+            <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>"</p>
+            <p>Excellent restaurant avec un service impeccable !</p>
+            <p>"</p>
           </div>
-          <button class="avis-nav avis-nav-right" id="avisNext" aria-label="Avis suivants">
-            &#10095;
-          </button>
+          <div class="avis-card">
+            <img src="./assets/img/testimonial_2_dark.jpg" alt="Profil avis client 2" />
+            <p>Sophie</p>
+            <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>"</p>
+            <p>Une expérience culinaire exceptionnelle, je recommande vivement !</p>
+            <p>"</p>
+          </div>
+          <div class="avis-card">
+            <img src="./assets/img/testimonial_3_dark.jpg" alt="Profil avis client 3" />
+            <p>Elise</p>
+            <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>"</p>
+            <p>Une ambiance chaleureuse et des plats délicieux !</p>
+            <p>"</p>
+          </div>
+          <div class="avis-card">
+            <img src="./assets/img/testimonial_4_dark.jpg" alt="Profil avis client 4" />
+            <p>Marc</p>
+            <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>"</p>
+            <p>Service rapide et plats savoureux, je reviendrai !</p>
+            <p>"</p>
+          </div>
         </div>
-        <a href="#" class="avis-link">Voir tous les avis</a>
+        <a href="#avis" class="avis-link">Voir tous les avis</a>
       </section>
     </main>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/menu.js" defer></script>
   </body>
 </html>

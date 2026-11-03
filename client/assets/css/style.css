@@ -3,11 +3,10 @@
   --blanc: #fafdf6;
   --or: #d4af37;
   --tranche: #d9d6cc;
-
-  --pw: 500px; /* largeur d'une page */
-  --ph: 467px; /*2auteur d'une page */
-  --marge: 14px; /* debord de la couverture */
-  --dur: 2s; /* duree d'un tour de page (garder = FLIP_MS dans script.js) */
+  --pw: 500px;
+  --ph: 467px;
+  --marge: 14px;
+  --dur: 700ms;
   --ease: cubic-bezier(0.37, 0, 0.63, 1);
 }
 
@@ -141,10 +140,10 @@ header {
 
 .logo2 {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 0;
   left: 50%;
   z-index: 1;
-  transform: translateX(-50%);
+  transform: translate(-50%, 50%);
 }
 
 .logo2 img {
@@ -187,15 +186,6 @@ header {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .carrousel img {
-    animation: none;
-  }
-
-  .carrousel img:first-child {
-    opacity: 1;
-  }
-}
 .intro {
   position: fixed;
   inset: 0;
@@ -257,7 +247,7 @@ summary {
   color: #fff;
   background: #b08d25;
   padding: 10px 18px;
-  border-radius: 8px;
+  border-radius: 6px;
   transition: background-color 0.2s ease;
   margin-left: 100px;
 }
@@ -344,11 +334,6 @@ button {
   color: inherit;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  details::details-content {
-    transition: none;
-  }
-}
 .mur img {
   display: block;
   width: 700px;
@@ -407,26 +392,25 @@ hr {
 
 .stage {
   position: absolute;
-  left: 50%;
   top: calc(50% - 20px);
-  margin-left: calc(var(--pw) * -1);
-  margin-top: calc(var(--ph) / -2);
+  left: 50%;
   width: calc(var(--pw) * 2);
   height: var(--ph);
-  transform-origin: center center;
-
+  margin-top: calc(var(--ph) / -2);
+  margin-left: calc(var(--pw) * -1);
+  transform-origin: center;
   perspective: 2600px;
   perspective-origin: 50% 40%;
 }
 
 .ground {
   position: absolute;
-  left: 50%;
   bottom: -70px;
+  left: 50%;
   width: 1500px;
   height: 90px;
   transform: translateX(-50%);
-  background: radial-gradient(closest-side, rgba(11, 10, 7, 0.16), rgba(11, 10, 7, 0));
+  background: radial-gradient(closest-side, rgba(11, 10, 7, 0.16), transparent);
   pointer-events: none;
 }
 
@@ -440,22 +424,25 @@ hr {
 .board {
   position: absolute;
   top: calc(var(--marge) * -1);
-  height: calc(var(--ph) + var(--marge) * 2);
   width: calc(var(--pw) + var(--marge));
-  background: var(--noir);
-  border-radius: 10px;
+  height: calc(var(--ph) + var(--marge) * 2);
   transform: translateZ(-2px);
+  border-radius: 10px;
+  background: var(--noir);
 }
+
 .board::after {
-  content: '';
   position: absolute;
   inset: 6px;
   border: 1.5px solid var(--or);
-  border-radius: 6px;
+  border-radius: 8px;
+  content: '';
 }
+
 .board-right {
   left: calc(var(--pw) - var(--marge));
 }
+
 .board-left {
   left: 0;
 }
@@ -465,28 +452,22 @@ hr {
   top: 0;
   width: var(--pw);
   height: var(--ph);
-  background: var(--blanc);
   transform: translateZ(-1px);
+  background: var(--blanc);
 }
+
 .edge-right {
   left: var(--pw);
-  box-shadow:
-    3px 1.5px 0 0 var(--blanc),
-    4px 1.5px 0 0 var(--tranche),
-    6px 3px 0 0 var(--blanc),
-    7px 3px 0 0 var(--tranche),
-    9px 4.5px 0 0 var(--blanc),
-    10px 4.5px 0 0 var(--tranche);
+  box-shadow: 3px 1.5px 0 var(--blanc), 4px 1.5px 0 var(--tranche),
+    6px 3px 0 var(--blanc), 7px 3px 0 var(--tranche), 9px 4.5px 0 var(--blanc),
+    10px 4.5px 0 var(--tranche);
 }
+
 .edge-left {
   left: 0;
-  box-shadow:
-    -3px 1.5px 0 0 var(--blanc),
-    -4px 1.5px 0 0 var(--tranche),
-    -6px 3px 0 0 var(--blanc),
-    -7px 3px 0 0 var(--tranche),
-    -9px 4.5px 0 0 var(--blanc),
-    -10px 4.5px 0 0 var(--tranche);
+  box-shadow: -3px 1.5px 0 var(--blanc), -4px 1.5px 0 var(--tranche),
+    -6px 3px 0 var(--blanc), -7px 3px 0 var(--tranche), -9px 4.5px 0 var(--blanc),
+    -10px 4.5px 0 var(--tranche);
 }
 
 .board-left,
@@ -494,6 +475,7 @@ hr {
   opacity: 0;
   transition: opacity calc(var(--dur) * 0.5) ease;
 }
+
 .book.open .board-left,
 .book.open .edge-left {
   opacity: 1;
@@ -505,20 +487,21 @@ hr {
   left: var(--pw);
   width: var(--pw);
   height: var(--ph);
+  transform: translateZ(var(--z, 0px)) rotateY(var(--a, 0deg));
   transform-origin: left center;
   transform-style: preserve-3d;
   transition: transform var(--dur) var(--ease);
-  transform: translateZ(var(--z, 0px)) rotateY(var(--a, 0deg));
 }
 
 .face {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   background: var(--blanc);
-  overflow: hidden;
 }
+
 .face img {
   display: block;
   width: 100%;
@@ -526,80 +509,72 @@ hr {
   user-select: none;
   -webkit-user-drag: none;
 }
+
 .face.back {
   transform: rotateY(180deg);
 }
 
 .face::after {
-  content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
+  content: '';
 }
+
 .face.front::after {
-  background: linear-gradient(90deg, rgba(11, 10, 7, 0.16), rgba(11, 10, 7, 0) 7%);
+  background: linear-gradient(90deg, rgba(11, 10, 7, 0.16), transparent 7%);
 }
+
 .face.back::after {
-  background: linear-gradient(270deg, rgba(11, 10, 7, 0.16), rgba(11, 10, 7, 0) 7%);
+  background: linear-gradient(270deg, rgba(11, 10, 7, 0.16), transparent 7%);
 }
 
 .hits {
   position: absolute;
   inset: 0;
-  transition: transform var(--dur) var(--ease);
   z-index: 5;
+  transition: transform var(--dur) var(--ease);
 }
+
 .hit {
   position: absolute;
   top: 0;
-  height: 100%;
   width: 50%;
+  height: 100%;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
 }
+
 .hit-left {
   left: 0;
 }
+
 .hit-right {
   left: 50%;
 }
+
 .hit:focus-visible {
   outline: 2px solid var(--or);
   outline-offset: -4px;
 }
+
 .hits:not(.open) .hit-left {
   display: none;
 }
 
 .hint {
   position: absolute;
-  left: 0;
   right: 0;
   bottom: 22px;
+  left: 0;
   margin: 0;
-  text-align: center;
-  font:
-    500 14px/1.4 Georgia,
-    'Times New Roman',
-    serif;
-  letter-spacing: 0.08em;
   color: var(--noir);
+  font: 500 14px/1.4 Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.08em;
+  text-align: center;
   opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.no-anim *,
-.no-anim *::before,
-.no-anim *::after {
-  transition: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --dur: 0.01s;
-  }
 }
 
 .avis-title {
@@ -614,60 +589,23 @@ hr {
   font-family: 'Segoe UI', Georgia, serif;
   padding: 2rem;
 }
-.avis-carousel {
-  display: flex;
-  align-items: center;
+.avis-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 1rem;
   max-width: 1080px;
   margin: 1rem auto;
-}
-.avis-cards {
-  display: flex;
-  flex: 1 1 auto;
-  gap: 2rem;
-  margin: 1rem 0;
   padding: 0.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-.avis-cards::-webkit-scrollbar {
-  display: none;
 }
 .avis-card {
-  flex: 0 0 300px;
   padding: 1rem;
   border: 1px solid var(--noir);
   border-radius: 8px;
-  margin-top: 2em;
-  scroll-snap-align: center;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
-.avis-nav {
-  flex: 0 0 auto;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--noir);
-  background: var(--blanc);
-  color: var(--noir);
-  font-size: 1.1rem;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
-}
-.avis-nav:hover,
-.avis-nav:focus-visible {
-  background: var(--or);
-  border-color: var(--or);
-  color: var(--blanc);
-  outline: none;
+.avis-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(11, 10, 7, 0.12);
 }
 .avis-link:hover {
   text-decoration: underline;
@@ -770,27 +708,14 @@ hr {
     width: min(300px, 80%);
     margin: 2rem auto;
   }
-  .scene {
-    height: min(80vh, 650px);
-  }
   .avis {
     padding: 1.25rem 0.75rem;
   }
   .avis-title {
     font-size: 1.6rem;
   }
-  .avis-carousel {
-    gap: 0.4rem;
-  }
-  .avis-cards {
-    gap: 0.75rem;
-  }
-  .avis-card {
-    flex-basis: min(280px, 78vw);
-  }
-  .avis-nav {
-    width: 36px;
-    height: 36px;
+  .scene {
+    height: min(80vh, 650px);
   }
   .avis-link {
     margin-top: 1.5rem;
@@ -806,8 +731,30 @@ hr {
   .nav-links a {
     font-size: 0.72rem;
   }
-  .avis-nav {
-    width: 30px;
-    height: 30px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 1ms;
+  }
+
+  .carrousel img {
+    animation: none;
+  }
+
+  .carrousel img:first-child {
+    opacity: 1;
+  }
+
+  details::details-content {
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
