@@ -589,17 +589,47 @@ hr {
   font-family: 'Segoe UI', Georgia, serif;
   padding: 2rem;
 }
-.avis-cards {
+.avis-carousel {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.75rem;
   max-width: 1080px;
   margin: 1rem auto;
+}
+.avis-cards {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 1rem;
+  margin: 0;
   padding: 0.5rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: 0.5rem;
   scrollbar-color: var(--or) transparent;
   scrollbar-width: thin;
+}
+.avis-nav {
+  display: grid;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid var(--noir);
+  border-radius: 50%;
+  background: var(--blanc);
+  color: var(--noir);
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.avis-nav:hover,
+.avis-nav:focus-visible {
+  background: var(--or);
+  color: var(--blanc);
+}
+.avis-nav:focus-visible {
+  outline: 2px solid var(--or-fonce);
+  outline-offset: 3px;
 }
 .avis-card {
   flex: 0 0 calc((100% - 2rem) / 3);
@@ -675,6 +705,14 @@ hr {
   }
   .avis-card {
     flex-basis: calc((100% - 1rem) / 2);
+  }
+  .avis-carousel {
+    gap: 0.5rem;
+  }
+  .avis-nav {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
   }
 }
 @media (max-width: 600px) {

@@ -121,4 +121,26 @@
   window.addEventListener('resize', fit);
   fit();
   render();
+
+  const avisCards = document.querySelector('.avis-cards');
+
+  if (avisCards) {
+    document.querySelectorAll('[data-avis-scroll]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const card = avisCards.querySelector('.avis-card');
+        if (!card) return;
+
+        const gap = Number.parseFloat(getComputedStyle(avisCards).gap) || 0;
+        const direction = Number(button.dataset.avisScroll);
+        const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'auto'
+          : 'smooth';
+
+        avisCards.scrollBy({
+          left: direction * (card.getBoundingClientRect().width + gap),
+          behavior,
+        });
+      });
+    });
+  }
 })();

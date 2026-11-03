@@ -143,44 +143,65 @@
       <section class="avis" id="avis">
         <h2 class="avis-title">Avis de nos clients</h2>
         <p>Découvrez ce que nos clients pensent de notre restaurant et de notre menu.</p>
-        <div
-          class="avis-cards"
-          role="region"
-          aria-label="Avis clients, défilement horizontal"
-          tabindex="0"
-        >
-          <div class="avis-card">
-            <img src="./assets/img/testimonial_1_dark.jpg" alt="Profil avis client 1" />
-            <p>Léa</p>
-            <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-            <p>"</p>
-            <p>Excellent restaurant avec un service impeccable !</p>
-            <p>"</p>
+        <div class="avis-carousel">
+          <button
+            class="avis-nav"
+            type="button"
+            data-avis-scroll="-1"
+            aria-label="Avis précédents"
+            aria-controls="avisCards"
+          >
+            &#10094;
+          </button>
+          <div
+            class="avis-cards"
+            id="avisCards"
+            role="region"
+            aria-label="Avis clients, défilement horizontal"
+            tabindex="0"
+          >
+            <div class="avis-card">
+              <img src="./assets/img/testimonial_1_dark.jpg" alt="Profil avis client 1" />
+              <p>Léa</p>
+              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <p>"</p>
+              <p>Excellent restaurant avec un service impeccable !</p>
+              <p>"</p>
+            </div>
+            <div class="avis-card">
+              <img src="./assets/img/testimonial_2_dark.jpg" alt="Profil avis client 2" />
+              <p>Sophie</p>
+              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <p>"</p>
+              <p>Une expérience culinaire exceptionnelle, je recommande vivement !</p>
+              <p>"</p>
+            </div>
+            <div class="avis-card">
+              <img src="./assets/img/testimonial_3_dark.jpg" alt="Profil avis client 3" />
+              <p>Elise</p>
+              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <p>"</p>
+              <p>Une ambiance chaleureuse et des plats délicieux !</p>
+              <p>"</p>
+            </div>
+            <div class="avis-card">
+              <img src="./assets/img/testimonial_4_dark.jpg" alt="Profil avis client 4" />
+              <p>Marc</p>
+              <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <p>"</p>
+              <p>Service rapide et plats savoureux, je reviendrai !</p>
+              <p>"</p>
+            </div>
           </div>
-          <div class="avis-card">
-            <img src="./assets/img/testimonial_2_dark.jpg" alt="Profil avis client 2" />
-            <p>Sophie</p>
-            <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-            <p>"</p>
-            <p>Une expérience culinaire exceptionnelle, je recommande vivement !</p>
-            <p>"</p>
-          </div>
-          <div class="avis-card">
-            <img src="./assets/img/testimonial_3_dark.jpg" alt="Profil avis client 3" />
-            <p>Elise</p>
-            <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-            <p>"</p>
-            <p>Une ambiance chaleureuse et des plats délicieux !</p>
-            <p>"</p>
-          </div>
-          <div class="avis-card">
-            <img src="./assets/img/testimonial_4_dark.jpg" alt="Profil avis client 4" />
-            <p>Marc</p>
-            <p class="avis-note">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-            <p>"</p>
-            <p>Service rapide et plats savoureux, je reviendrai !</p>
-            <p>"</p>
-          </div>
+          <button
+            class="avis-nav"
+            type="button"
+            data-avis-scroll="1"
+            aria-label="Avis suivants"
+            aria-controls="avisCards"
+          >
+            &#10095;
+          </button>
         </div>
         <a href="#avis" class="avis-link">Voir tous les avis</a>
       </section>
