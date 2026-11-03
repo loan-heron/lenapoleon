@@ -17,7 +17,6 @@ body {
   align-items: center;
   justify-content: center;
   padding: 24px;
-
 }
 
 main {
@@ -108,4 +107,45 @@ h1 {
 
 .btn:active {
   transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 1.25rem;
+  }
+  main {
+    max-width: 100%;
+  }
+  .logo {
+    width: min(150px, 45vw);
+    height: auto;
+    margin: 2rem auto;
+  }
+  h1 {
+    padding-left: 0.2em;
+    font-size: clamp(1.7rem, 8vw, 2.4rem);
+    letter-spacing: 0.2em;
+  }
+  .baseline {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+  }
+  .signature {
+    max-width: 100%;
+    gap: 0.6rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+  }
+  .question {
+    margin: 2.5rem 0 1.75rem;
+    font-size: 1.1rem;
+  }
+  .boutons {
+    gap: 1rem;
+  }
+  .btn {
+    max-width: 100%;
+    padding: 1rem 0.75rem;
+    font-size: 1.15rem;
+  }
 }

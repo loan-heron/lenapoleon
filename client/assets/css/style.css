@@ -405,7 +405,6 @@ hr {
   outline: none;
 }
 
-/* le stage garde la taille d'origine, JS le met a l'echelle de l'ecran */
 .stage {
   position: absolute;
   left: 50%;
@@ -415,8 +414,7 @@ hr {
   width: calc(var(--pw) * 2);
   height: var(--ph);
   transform-origin: center center;
-  /* la perspective est portee par le stage : le livre est en 3D,
-     la couche de clic reste a plat par-dessus */
+
   perspective: 2600px;
   perspective-origin: 50% 40%;
 }
@@ -439,7 +437,6 @@ hr {
   transition: transform var(--dur) var(--ease);
 }
 
-/* ---------- Couverture rigide ---------- */
 .board {
   position: absolute;
   top: calc(var(--marge) * -1);
@@ -463,7 +460,6 @@ hr {
   left: 0;
 }
 
-/* ---------- Epaisseur des pages ---------- */
 .edge {
   position: absolute;
   top: 0;
@@ -493,7 +489,6 @@ hr {
     -10px 4.5px 0 0 var(--tranche);
 }
 
-/* le cote gauche n'existe que livre ouvert */
 .board-left,
 .edge-left {
   opacity: 0;
@@ -504,11 +499,10 @@ hr {
   opacity: 1;
 }
 
-/* ---------- Feuilles ---------- */
 .sheet {
   position: absolute;
   top: 0;
-  left: var(--pw); /* le dos du livre */
+  left: var(--pw);
   width: var(--pw);
   height: var(--ph);
   transform-origin: left center;
@@ -536,7 +530,6 @@ hr {
   transform: rotateY(180deg);
 }
 
-/* ombre droite au niveau du pli, sans flou */
 .face::after {
   content: '';
   position: absolute;
@@ -550,7 +543,6 @@ hr {
   background: linear-gradient(270deg, rgba(11, 10, 7, 0.16), rgba(11, 10, 7, 0) 7%);
 }
 
-/* ---------- Zones de clic ---------- */
 .hits {
   position: absolute;
   inset: 0;
@@ -581,7 +573,6 @@ hr {
   display: none;
 }
 
-/* ---------- Indication ---------- */
 .hint {
   position: absolute;
   left: 0;
@@ -700,4 +691,123 @@ hr {
   text-underline-offset: 6px;
   font-weight: bold;
   color: var(--or);
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    width: calc(100% - 2rem);
+    padding: 0.75rem 1rem;
+  }
+  .nav-links {
+    gap: 1rem;
+  }
+  main {
+    margin-top: 100px;
+  }
+  .mur img,
+  .resto img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem auto;
+  }
+  .titre,
+  #texte-page-1 {
+    width: auto;
+    margin: 1.5rem 1rem;
+  }
+  hr {
+    max-width: 80%;
+  }
+}
+@media (max-width: 600px) {
+  .navbar {
+    top: 0.5rem;
+    width: calc(100% - 1rem);
+    height: auto;
+    min-height: 60px;
+    padding: 0.4rem 0.75rem;
+    border-radius: 18px;
+  }
+  .navbar .logo {
+    height: 44px;
+    width: auto;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0 0.65rem;
+  }
+  .nav-links a {
+    padding: 0.2rem 0;
+    font-size: 0.8rem;
+  }
+  .carrousel {
+    height: 75svh;
+    min-height: 420px;
+  }
+  .logo2 img {
+    height: min(120px, 22vw);
+  }
+  main {
+    margin-top: 2rem;
+  }
+  .mur img,
+  .resto img {
+    width: 100%;
+    max-height: 65vh;
+    object-fit: cover;
+    margin: 1rem auto;
+  }
+  .titre,
+  #texte-page-1 {
+    margin: 1.25rem 1rem;
+    padding: 1rem;
+  }
+  #texte-page-1 {
+    width: auto;
+  }
+  hr {
+    width: min(300px, 80%);
+    margin: 2rem auto;
+  }
+  .scene {
+    height: min(80vh, 650px);
+  }
+  .avis {
+    padding: 1.25rem 0.75rem;
+  }
+  .avis-title {
+    font-size: 1.6rem;
+  }
+  .avis-carousel {
+    gap: 0.4rem;
+  }
+  .avis-cards {
+    gap: 0.75rem;
+  }
+  .avis-card {
+    flex-basis: min(280px, 78vw);
+  }
+  .avis-nav {
+    width: 36px;
+    height: 36px;
+  }
+  .avis-link {
+    margin-top: 1.5rem;
+  }
+}
+@media (max-width: 380px) {
+  .navbar {
+    align-items: flex-start;
+  }
+  .nav-links {
+    gap: 0 0.45rem;
+  }
+  .nav-links a {
+    font-size: 0.72rem;
+  }
+  .avis-nav {
+    width: 30px;
+    height: 30px;
+  }
 }

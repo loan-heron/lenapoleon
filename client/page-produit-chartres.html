@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Le Napoléon — Notre boutique à Chartres</title>
     <link rel="stylesheet" href="./assets/css/page-produit-chartres.css" />
+    <link rel="stylesheet" href="./assets/css/auth.css" />
+    <link rel="stylesheet" href="./assets/css/panier.css" />
   </head>
 
   <body>
@@ -17,8 +19,9 @@
         <ul class="nav-links">
           <li><a href="#reserver">Réserver</a></li>
           <li><a href="#notre-carte">Notre carte</a></li>
-          <li><a href="#avis">Avis</a></li>
           <li><a href="./boutiques.html">Boutique</a></li>
+          <li><button class="cart-trigger" type="button" data-cart-open>Panier <span class="cart-count" data-cart-count>0</span></button></li>
+          <li><button class="auth-trigger" type="button" data-auth-open>Se connecter</button></li>
         </ul>
       </nav>
     </header>
@@ -175,5 +178,47 @@
     <footer class="footer">
       <p>Le Napoléon Chartres · <a href="./boutiques.html">Voir toutes nos boutiques</a></p>
     </footer>
+    <dialog class="auth-dialog" aria-labelledby="auth-title" data-auth-dialog>
+      <button class="auth-close" type="button" aria-label="Fermer" data-auth-close>&times;</button>
+      <p class="auth-eyebrow">Espace client</p>
+      <h2 id="auth-title" data-auth-title>Bienvenue</h2>
+      <p class="auth-description" data-auth-description>Connectez-vous pour retrouver vos commandes et vos informations.</p>
+      <div class="auth-tabs" role="tablist" aria-label="Espace client">
+        <button type="button" role="tab" aria-selected="true" data-auth-mode="login">Connexion</button>
+        <button type="button" role="tab" aria-selected="false" data-auth-mode="signup">Créer un compte</button>
+      </div>
+      <form class="auth-form" data-auth-form>
+        <div class="auth-field" data-auth-name hidden>
+          <label for="auth-name">Nom complet</label>
+          <input id="auth-name" name="name" autocomplete="name" />
+        </div>
+        <div class="auth-field">
+          <label for="auth-email">Adresse e-mail</label>
+          <input id="auth-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="auth-field" data-auth-password>
+          <label for="auth-password">Mot de passe</label>
+          <input id="auth-password" name="password" type="password" autocomplete="current-password" minlength="8" required />
+        </div>
+        <button class="auth-submit" type="submit" data-auth-submit>Se connecter</button>
+      </form>
+      <button class="auth-forgot" type="button" data-auth-forgot>Mot de passe oublié ?</button>
+      <p class="auth-feedback" role="status" aria-live="polite" data-auth-feedback></p>
+    </dialog>
+    <dialog class="cart-dialog" aria-labelledby="cart-title" data-cart-dialog>
+      <div class="cart-heading">
+        <div><p class="cart-eyebrow">Votre sélection</p><h2 id="cart-title">Mon panier</h2></div>
+        <button class="cart-close" type="button" aria-label="Fermer le panier" data-cart-close>&times;</button>
+      </div>
+      <p class="cart-empty" data-cart-empty>Votre panier est vide pour le moment.</p>
+      <ul class="cart-items" data-cart-items aria-live="polite"></ul>
+      <div class="cart-summary" data-cart-summary hidden>
+        <p><span>Total</span><strong data-cart-total>0,00&nbsp;€</strong></p>
+        <button class="cart-clear" type="button" data-cart-clear>Vider le panier</button>
+      </div>
+      <p class="cart-note">Votre panier est enregistré sur cet appareil. Le paiement en ligne n’est pas encore activé.</p>
+    </dialog>
+    <script src="./assets/js/panier.js" defer></script>
+    <script src="./assets/js/auth.js" defer></script>
   </body>
 </html>
