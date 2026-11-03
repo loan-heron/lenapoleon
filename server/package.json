@@ -21,10 +21,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "node --watch app.js",
-    "db:migrate": "node database/migrations/migrate.js",
-    "db:seed": "node database/seeds/seed.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch app.js"
   },
   "dependencies": {
     "dotenv": "^18.0.9",
